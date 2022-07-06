@@ -93,6 +93,7 @@ public class SmsSendServiceImpl implements SmsSendService {
         // 创建发送日志。如果模板被禁用，则不发送短信，只记录日志
         Boolean isSend = CommonStatusEnum.ENABLE.getStatus().equals(template.getStatus())
                 && CommonStatusEnum.ENABLE.getStatus().equals(smsChannel.getStatus());
+        ;
         String content = smsTemplateService.formatSmsTemplateContent(template.getContent(), templateParams);
         Long sendLogId = smsLogService.createSmsLog(mobile, userId, userType, isSend, template, content, templateParams);
 
@@ -131,7 +132,7 @@ public class SmsSendServiceImpl implements SmsSendService {
      * <p>
      * 原因是，部分短信平台并不是使用 key 作为参数，而是数组下标，例如说腾讯云 https://cloud.tencent.com/document/product/382/39023
      *
-     * @param template 短信模板
+     * @param template       短信模板
      * @param templateParams 原始参数
      * @return 处理后的参数
      */
